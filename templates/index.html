@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sage Test</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	    <!-- Bootstrap CSS -->
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	    <!--for icons -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<link href="{% static 'css/landpage.css' %}" rel="stylesheet">
+</head>
+<body>
+		<nav class="navbar navbar-expand-sm bg-transparent navbar-light py-3">
+			
+			<div class="container">
+				<a href="{% url 'index' %}" class="navbar-brand"><h2>Sage x <span style="color: rgb(100, 100, 200);"> Shub Test</span></h2></a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
+
+				<div class="collapse navbar-collapse" id="navmenu">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item px-4">
+							<a href="{% url 'library' %}" class="nav-link">
+								Test Library
+							</a>
+
+						</li>
+						{% if user.is_authenticated %}
+						<li class="nav-item px-4">
+							<a href="{% url 'profile' %}" class="nav-link">
+								Profile
+							</a>
+
+						</li>
+
+						<li class="nav-item px-4">
+							<a href="{% url 'profile' %}" class="nav-link">
+								About
+							</a>
+
+						</li>
+				
+
+						<li class="nav-item px-4">
+							<a href="{% url 'logout' %}" class="nav-link">
+								Log-out
+							</a>
+						</li>
+
+
+						{% else %}
+						<li class="nav-item px-4">
+							<a href="{% url 'login' %}" class="nav-link">
+								Login
+							</a>
+
+						</li>
+						
+						<li class="nav-item px-4">
+							<a href="{% url 'registerStudent' %}" class="nav-link">
+								Sign up
+							</a>
+						</li>
+						{% endif %}
+
+					</ul>
+				</div>
+				
+				
+			</div>
+		</nav>
+
+	{% if user.is_authenticated %}
+
+		
+		
+		{% if user.is_student %}
+			<section class="bg-transparent text-dark p-5 text-center text-md-start">
+			<div class="container">
+				<div class="d-sm-flex align-items-center justify-content-between">
+					<div>
+						<h2>Student dashboard</h2>
+						<h3>Hello <span style="color: rgb(100, 100, 200);">{{user.username}}!</span></h3>
+            			<p class="lead my-4"><strong>Bio: {{student.bio}}</strong></p>
+            			<p>Exam taken: {{student.examtaken}}</p>
+            			<p>Exam passed: {{student.exampassed}}</p>
+            			<p>Level: {{level}}</p>
+					</div>		
+					<img src="{% static 'img/software-engineer.svg' %}" class="img-fluid ms-auto w-50 d-md-block d-none" />
+					
+				</div>
+			</div>
+		</section>
+
+		
+		<section class="p-5">
+      	<div class="container">
+
+      		
+	        <div class="row text-center">
+	        <h3 id="feature"><a href="{% url 'record' %}">Your Records</a></h3>
+	        {% for record in record|slice:":3" %}
+	          <div class="col-md"  id="about">
+	            <div class="card bg-white text-dark">
+	              <div class="card-body text-center">                
+	                
+						<p class="lead"><h2>Exam: {{record.exam}}</h2>
+						<p>Created by: {{record.teacher}}</p>
+						<p>Score: {{record.score}}</p>
+						<p>Percentage: {{record.percentage}}</p>
+						<p>Time taken: {{record.time_taken}}</p>
+						<p>Difficulty: {{record.difficulty}}</p>
+						<p>Date: {{record.date}}</p>
+						</p><br>
+					
+	              </div>
+	            </div>
+
+	            <br> 
+	            </div>
+	            {% endfor %}   
+	    </section>
+	    
+
+
+		{% elif user.is_teacher %}
+
+			<section class="bg-transparent text-dark p-5 text-center text-md-start">
+			<div class="container">
+				<div class="d-sm-flex align-items-center justify-content-between">
+					<div>
+						<h2>Teacher dashboard</h2>
+						<h3>Hello <span style="color: rgb(100, 100, 200);">{{user.username}}!</span></h3>
+            			<p class="lead my-4"><strong>Bio: {{teacher.bio}}</strong></p>
+            			<p>Exams Made: {{teacher.examsmade}}</p>
+            			<p>Level: {{level}}</p>
+            			<a href="{% url 'createexam' %}"><button class="btn btn-dark btn-sm">Create new exam</button></a>
+					</div>		
+					<img src="{% static 'img/software-engineer.svg' %}" class="img-fluid ms-auto w-50 d-md-block d-none" />
+					
+				</div>
+			</div>
+		</section>
+
+		<section class="p-5">
+      	<div class="container">
+
+	        <div class="row text-center">
+
+	          <div class="col-md"  id="about">
+	            <div class="card bg-white text-dark">
+	              <div class="card-body text-center">
+	                <h3 id="feature">Your Exams: </h3>
+	                {% for myexam in myexam %}
+						<p class="lead"><h2>{{myexam.name}}</h2>
+							<a href="{{myexam.slug}}.{{myexam.id}}/"><button class="btn btn-dark btn-sm">View</button></a>
+							<a href="{{myexam.slug}}.{{myexam.id}}/add-question"><button class="btn btn-primary btn-sm">Add questions</button></a>
+						</p><br>
+					{% endfor %}
+	              </div>
+	            </div>
+	            <br>
+
+	            
+	            
+	            
+	          </div>
+	          <div class="col-md">
+	            <div class="card bg-white text-dark">
+	              <div class="card-body text-center">
+	                <h1 id="about">Engagements</h1>
+	               {% for myexam in myexam %}
+						<p class="lead"><h2>{{myexam.name}}</h2>
+							<p>Participations: {{myexam.participated}} engagements</p>
+						</p><br>
+					{% endfor %}
+	              </div>
+	            </div>
+	          </div>
+	          </div>
+	          </div>
+	          </section>
+			
+
+			
+			
+			
+
+		{% else %}
+			<h2>undefined</h2>
+			
+		{% endif %}		
+
+	{% endif %}
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

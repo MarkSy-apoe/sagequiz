@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sage Test</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	    <!-- Bootstrap CSS -->
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	    <!--for icons -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<link href="{% static 'css/landpage.css' %}" rel="stylesheet">
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm bg-transparent navbar-light py-3">
+			
+			<div class="container">
+				<a href="{% url 'index' %}" class="navbar-brand"><h2>Sage x <span style="color: rgb(100, 100, 200);"> Shub Test</span></h2></a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
+
+				<div class="collapse navbar-collapse" id="navmenu">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item px-4">
+							<a href="{% url 'library' %}" class="nav-link">
+								Test Library
+							</a>
+
+						</li>
+						<li class="nav-item px-4">
+							<a href="{% url 'index' %}" class="nav-link">
+								Home
+							</a>
+						
+						<li class="nav-item px-4">
+							<a href="{% url 'registerStudent' %}" class="nav-link">
+								Sign up
+							</a>
+						</li>
+						
+
+					</ul>
+				</div>
+				
+				
+			</div>
+		</nav>
+
+	<section class="bg-transparent text-dark p-5 text-center text-md-start">
+			<div class="container">
+				<div class="d-sm-flex align-items-center justify-content-between">
+					<div>
+						<h2>Login</h2>
+						<h3>Hello <span style="color: rgb(100, 100, 200);">Visitor!</span></h3><br>
+            			<form method="POST">{% csrf_token %}
+						<label>Email: </label><br><input type="email" name="email" id="inputEmail" placeholder="Email" required><br><br>
+
+
+						<label>Password: </label><br><input type="password" name="password" id="inputPassword" placeholder="Password" required><br>
+
+						
+
+						
+						{% for field in login_form %}
+							<p>
+							{% for error in field.errors %}
+								<p style="color: red">{{ error }}</p>
+							{% endfor %}
+							</p>
+						{% endfor %}
+						
+						{% if login_form.non_field_errors %}
+							<div style="color: red">
+								<p>{{login_form.non_field_errors}}</p>
+							</div>
+						{% endif %}
+						<br>
+						<button type="submit" class="btn btn-dark btn-md">Login</button>
+					</form>
+            		
+					</div>		
+					<img src="{% static 'img/software-engineer.svg' %}" class="img-fluid ms-auto w-50 d-md-block d-none" />
+					
+				</div>
+			</div>
+		</section>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

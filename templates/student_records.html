@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sage LMS</title>
+</head>
+<body>
+	{% if user.is_authenticated %}
+		<h1>Hello {{user.username}}</h1>
+		<a href="{% url 'index' %}">Home</a>
+		<a href="{% url 'profile' %}">Profile</a>
+		<a href="{% url 'library' %}">Test Library</a>
+		<a href="#">About</a>
+		
+		{% if user.is_student %}
+			<!--student dash containing application for school and class-->
+			<h2>Student dashboard</h2>
+			<h3>Your records: </h3>
+			{% for record in record %}
+				<h3>Exam: {{record.exam}}</h3>
+				<p>Created by: {{record.teacher}}</p>
+				<p>Score: {{record.score}}</p>
+				<p>Percentage: {{record.percentage}}</p>
+				<p>Time taken: {{record.time_taken}}</p>
+				<p>Difficulty: {{record.difficulty}}</p>
+				<p>Date: {{record.date}}</p>
+			{% endfor %}
+			
+		{% endif %}
+
+		<a href="{% url 'logout' %}">Logout</a>
+
+
+		
+
+	{% else %}
+	<p>Register or login to access this page</p>
+	<button><a href="{% url 'login' %}">Login</a></button>
+	<button><a href="{% url 'registerStudent' %}">Register</a></button>
+	{% endif %}
+
+</body>
+</html>

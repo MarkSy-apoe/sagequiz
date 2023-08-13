@@ -1,0 +1,254 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sage Test</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	    <!-- Bootstrap CSS -->
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	    <!--for icons -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<link href="{% static 'css/landpage.css' %}" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-transparent navbar-light py-3">
+			
+			<div class="container">
+				<a href="{% url 'index' %}" class="navbar-brand"><h2>Sage x <span style="color: rgb(100, 100, 200);"> Shub Test</span></h2></a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
+
+				<div class="collapse navbar-collapse" id="navmenu">
+					<ul class="navbar-nav ms-auto">
+					<li class="nav-item px-4">
+							<a href="{% url 'index' %}" class="nav-link">
+								Home
+							</a>
+
+						</li>
+						{% if user.is_authenticated %}
+						
+						<li class="nav-item px-4">
+							<a href="{% url 'profile' %}" class="nav-link">
+								Profile
+							</a>
+
+						</li>
+
+						<li class="nav-item px-4">
+							<a href="{% url 'profile' %}" class="nav-link">
+								About
+							</a>
+
+						</li>
+				
+
+						<li class="nav-item px-4">
+							<a href="{% url 'logout' %}" class="nav-link">
+								Log-out
+							</a>
+						</li>
+
+						{% endif %}
+
+					</ul>
+				</div>
+				
+				
+			</div>
+		</nav>
+	<div class="container">
+	<h1>Test/Exam Library</h1>
+	</div>
+
+
+	<section>
+
+		<div class="container">
+		 <div class="col-md"  id="about">
+	            <div class="card bg-white text-dark">
+	              <div class="card-body text-center">
+			<h2>Programming: </h2>
+			{% for programming in programming|slice:":5" %}
+				<div class="testcourse">
+					<h3><a href="{{programming.get_absolute_url}}">{{programming.name}}</a></h3>
+					<p>{{programming.description}}</p>
+					<p>{{programming.difficulty}}</p>
+					<p>Engagements: {{programming.participated}}</p>
+				</div>
+			{% endfor %}
+			<button><a href="#">See more</a></button>
+			</div>
+			</div>
+			</div>
+			
+		</div>
+	</section><br>
+
+
+<section class="p-5">
+	 <div class="row text-center">
+
+		<div class="container">
+		{% for mathematics in mathematics|slice:":5" %}
+		 <div class="col-md"  id="about">
+	            <div class="card bg-white text-dark">
+	              <div class="card-body text-center">
+			<h2>Mathematics: </h2>
+			
+				
+					<h3><a href="{{mathematics.get_absolute_url}}">{{mathematics.name}}</a></h3>
+					<p>{{mathematics.description}}</p>
+					<p>{{mathematics.difficulty}}</p>
+					<p>Engagements: {{mathematics.participated}}</p>
+					
+				
+			
+			<button><a href="#">See more</a></button>
+			</div>
+			</div>
+			</div>
+			{% endfor %}
+		</div>
+	</section>
+	
+
+	<div>
+	<h2>English: </h2>
+	{% for english in english|slice:":5" %}
+		<div>
+			<h3><a href="{{english.get_absolute_url}}">{{english.name}}</a></h3>
+			<p>{{english.description}}</p>
+			<p>{{english.difficulty}}</p>
+			<p>Engagements: {{english.participated}}</p>
+			
+		</div>
+	{% endfor %}
+	<button><a href="#">See more</a></button>
+	</div>
+
+	<div>
+	<h2>History: </h2>
+	{% for history in history|slice:":5" %}
+		<div>
+			<h3><a href="{{history.get_absolute_url}}">{{history.name}}</a></h3>
+			<p>{{history.description}}</p>
+			<p>{{history.difficulty}}</p>
+			<p>Engagements: {{history.participated}}</p>
+			
+		</div>
+	{% endfor %}
+	<button><a href="#">See more</a></button>
+	</div>
+
+	<div>
+	<h2>Chemistry: </h2>
+	{% for chemistry in chemistry|slice:":5" %}
+		<div>
+			<h3><a href="{{chemistry.get_absolute_url}}">{{chemistry.name}}</a></h3>
+			<p>{{chemistry.description}}</p>
+			<p>{{chemistry.difficulty}}</p>
+			<p>Engagements: {{chemistry.participated}}</p>
+		</div>
+	{% endfor %}
+	<button><a href="#">See more</a></button>
+	</div>
+
+	<div>
+	<h2>Physics: </h2>
+	{% for physics in physics|slice:":5" %}
+		<div>
+			<h3><a href="{{physics.get_absolute_url}}">{{physics.name}}</a></h3>
+			<p>{{physics.description}}</p>
+			<p>{{physics.difficulty}}</p>
+			<p>Engagements: {{physics.participated}}</p>
+		</div>
+	{% endfor %}
+	<button><a href="#">See more</a></button>
+	</div>
+
+	<div>
+	<h2>Biology: </h2>
+	{% for biology in biology|slice:":5" %}
+		<div>
+			<h3><a href="{{biology.get_absolute_url}}">{{biology.name}}</a></h3>
+			<p>{{biology.description}}</p>
+			<p>{{biology.difficulty}}</p>
+			<p>Engagements: {{biology.participated}}</p>
+		</div>
+	{% endfor %}
+	<button><a href="#">See more</a></button>
+	</div>
+
+	<div>
+	<h2>Government: </h2>
+	{% for government in government|slice:":5" %}
+		<div>
+			<h3><a href="{{government.get_absolute_url}}">{{government.name}}</a></h3>
+			<p>{{government.description}}</p>
+			<p>{{government.difficulty}}</p>
+			<p>Engagements: {{government.participated}}</p>
+		</div>
+	{% endfor %}
+	<button><a href="#">See more</a></button>
+	</div>
+
+	<div>
+	<h2>Agriculture: </h2>
+	{% for agriculture in agriculture|slice:":5" %}
+		<div>
+			<h3><a href="{{agriculture.get_absolute_url}}">{{agriculture.name}}</a></h3>
+			<p>{{agriculture.description}}</p>
+			<p>{{agriculture.difficulty}}</p>
+			<p>Engagements: {{agriculture.participated}}</p>
+		</div>
+	{% endfor %}
+	<button><a href="#">See more</a></button>
+	</div>
+
+	<div>
+	<h2>Civic: </h2>
+	{% for civic in civic|slice:":5" %}
+		<div>
+			<h3><a href="{{civic.get_absolute_url}}">{{civic.name}}</a></h3>
+			<p>{{civic.description}}</p>
+			<p>{{civic.difficulty}}</p>
+			<p>Engagements: {{civic.participated}}</p>
+		</div>
+	{% endfor %}
+	<button><a href="#">See more</a></button>
+	</div>
+
+	<div>
+	<h2>Literature: </h2>
+	{% for literature in literature|slice:":5" %}
+		<div>
+			<h3><a href="{{literature.get_absolute_url}}">{{literature.name}}</a></h3>
+			<p>{{literature.description}}</p>
+			<p>{{literature.difficulty}}</p>
+			<p>Engagements: {{literature.participated}}</p>
+		</div>
+	{% endfor %}
+	<button><a href="#">See more</a></button>
+	</div>
+
+	<div>
+	<h2>Cyber Security: </h2>
+	{% for cybersec in cybersec|slice:":5" %}
+	 	<div>
+			<h3><a href="{{cybersec.get_absolute_url}}">{{cybersec.name}}</a></h3>
+			<p>{{cybersec.description}}</p>
+			<p>{{cybersec.difficulty}}</p>
+			<p>Engagements: {{cybersec.participated}}</p>
+		</div>
+	{% endfor %}
+	<button><a href="#">See more</a></button>
+	</div>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}">
+	</script>
+</body>
+</html>

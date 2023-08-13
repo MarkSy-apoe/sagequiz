@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sage LMS</title>
+</head>
+<body>
+	<form method="POST">{% csrf_token %}
+			<p>Are you sure?</p>
+			<input type="submit" value="Yes">
+			<a href="/">Cancel</a>
+			</form>
+</body>
+</html>
