@@ -64,14 +64,12 @@ class AccountAuthenticationForm(forms.ModelForm):
 
 	class Meta:
 		model = Account
-		fields = ('email', 'password')
+		fields = ('email', 'password') 
 
 	def save(self, request):
 		loguser = authenticate(email=self.cleaned_data['email'], password = self.cleaned_data['password'])
 		if loguser:
-			login(request, loguser)
-
-			
+			login(request, loguser)			
 
 
 	def clean(self):
